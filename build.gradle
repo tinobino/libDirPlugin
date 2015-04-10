@@ -1,14 +1,8 @@
-apply plugin: 'java'
-apply plugin: LibDirPlugin
-
-repositories {
-	mavenCentral()
-}
+apply plugin: 'groovy'
 
 dependencies {
-	compileDependencies('log4j:log4j:1.2.9')
-
-	testCompileDependencies('junit:junit:4.12')
+	compile gradleApi()
+	compile localGroovy()
 }
 
 class LibDirPlugin implements Plugin<Project>
