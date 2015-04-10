@@ -1,2 +1,3 @@
 #gradle specific ignores
-.gradle/
+/.gradle/
+/build/
