@@ -28,14 +28,14 @@ class LibDirPlugin implements Plugin<Project>
 			description 'resolve and copy all compile dependencies'
 			into 'libs/compile'
 			from project.configurations.compileDependencies
-			outputs.dir 'libs/compile'
+			outputs.files project.configurations.compileDependencies
 		}
 		project.task('resolveTestCompileDependencies', type: Copy)
 		{
 			description 'resolve and copy all test dependencies'
 			into 'libs/test'
 			from project.configurations.testCompileDependencies - project.configurations.compileDependencies
-			outputs.dir 'libs/test'
+			outputs.files project.configurations.testCompileDependencies - project.configurations.compileDependencies
 		}
 		project.task('resolveDependencies', type: Copy)
 		{
