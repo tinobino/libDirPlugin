@@ -1,0 +1,2 @@
+#gradle specific ignores
+.gradle/
