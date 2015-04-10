@@ -1,3 +1,4 @@
+apply plugin: 'java'
 apply plugin: LibDirPlugin
 
 repositories {
@@ -43,6 +44,10 @@ class LibDirPlugin implements Plugin<Project>
 			description 'resolves and copies all dependencies into lib folder'
 			dependsOn project.tasks.resolveCompileDependencies, project.tasks.resolveTestCompileDependencies
 		}
+
+		// add dependency to lib folders for the java compile and testCompile configurations
+		project.dependencies.add('compile', project.tasks.resolveCompileDependencies.outputs.getFiles())
+		project.dependencies.add('testCompile', project.tasks.resolveTestCompileDependencies.outputs.getFiles())
 
 		// add clean tasks
 		project.task('cleanResolveCompileDependencies', type: Delete)
