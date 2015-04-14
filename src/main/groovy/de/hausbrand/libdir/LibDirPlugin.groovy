@@ -1,4 +1,4 @@
-package org.exedio.libdir;
+package de.hausbrand.libdir;
 
 import org.gradle.api.*
 import org.gradle.api.artifacts.*
