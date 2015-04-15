@@ -59,5 +59,17 @@ class LibDirPlugin implements Plugin<Project>
 			description 'deletes all dependencies from lib folder'
 			dependsOn project.tasks.cleanResolveCompileDependencies, project.tasks.cleanResolveTestCompileDependencies
 		}
+
+		if(project.hasProperty('eclipse'))
+		{
+			// make sure eclipse classpath uses relative paths
+			project.eclipse.classpath.file {
+				whenMerged { classpath ->
+					classpath.entries.each { entry ->
+						println entry.path 
+						entry.path=entry.path.replace( "$project.rootDir", ".") }
+				}
+			}
+		}
 	}
 }
