@@ -17,10 +17,3 @@ publishing {
 		ivy { url "$buildDir/localIvyRepository" }
 	}
 }
-
-/*class LibDirPluginExtension
- {
- def compileLibDir
- def testCompileLibDir
- }
- */
