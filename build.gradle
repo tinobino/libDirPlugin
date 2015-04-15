@@ -1,13 +1,26 @@
 apply plugin: 'groovy'
+apply plugin: 'ivy-publish'
+
+group = 'de.hausbrand.libdir'
+version = '1.0'
 
 dependencies {
 	compile gradleApi()
 	compile localGroovy()
 }
 
-/*class LibDirPluginExtension
-{
-	def compileLibDir
-	def testCompileLibDir
+publishing {
+	publications {
+		ivyJava(IvyPublication) { from components.java }
+	}
+	repositories {
+		ivy { url "$buildDir/localIvyRepository" }
+	}
 }
-*/
+
+/*class LibDirPluginExtension
+ {
+ def compileLibDir
+ def testCompileLibDir
+ }
+ */
