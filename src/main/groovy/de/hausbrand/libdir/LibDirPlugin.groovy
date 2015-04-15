@@ -4,13 +4,11 @@ import org.gradle.api.*
 import org.gradle.api.artifacts.*
 import org.gradle.api.tasks.*
 
-class LibDirPlugin implements Plugin<Project>
-{
-	void apply(Project project)
-	{
+class LibDirPlugin implements Plugin<Project> {
+	void apply(Project project) {
 		// add plugin specific properties
 		//project.extensions.create("libDirPlugin", LibDirPluginExtension)
-		
+
 		// add two additional configurations for declaring dependencies which will be resolved into the lib folders
 		project.configurations.create('compileDependencies')
 		project.configurations.create('testCompileDependencies')
@@ -65,9 +63,7 @@ class LibDirPlugin implements Plugin<Project>
 			// make sure eclipse classpath uses relative paths
 			project.eclipse.classpath.file {
 				whenMerged { classpath ->
-					classpath.entries.each { entry ->
-						println entry.path 
-						entry.path=entry.path.replace( "$project.rootDir", ".") }
+					classpath.entries.each { entry -> entry.path=entry.path.replace( "$project.rootDir", ".") }
 				}
 			}
 		}
