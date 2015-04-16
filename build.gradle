@@ -1,4 +1,5 @@
 apply plugin: 'groovy'
+apply plugin: 'eclipse'
 apply plugin: 'ivy-publish'
 
 group = 'de.hausbrand.libdir'

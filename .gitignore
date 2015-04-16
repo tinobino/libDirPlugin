@@ -1,3 +1,16 @@
+#temporary files
+*.tmp
+*.bak
+*.swp
+
+#local project files
+local.properties
+
+#eclipse files
+.settings/
+/bin/
+/tmp/
+
 #gradle specific ignores
 /.gradle/
 /build/
