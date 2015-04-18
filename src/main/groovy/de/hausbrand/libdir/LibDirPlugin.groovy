@@ -14,7 +14,7 @@ class LibDirPlugin implements Plugin<Project> {
 		}
 
 		// add plugin specific properties
-		//project.extensions.create("libDirPlugin", LibDirPluginExtension)
+		project.extensions.create("libdir", LibDirPluginExtension)
 
 		// add two additional configurations for declaring dependencies which will be resolved into the lib folders
 		project.configurations.create('compileDependencies')
@@ -25,16 +25,16 @@ class LibDirPlugin implements Plugin<Project> {
 		project.task('resolveCompileDependencies', type: Copy)
 		{
 			description 'resolve and copy all compile dependencies'
-			into 'libs/compile'
+			into "$project.libdir.libDirPathName/$project.libdir.compilePathName"
 			from project.configurations.compileDependencies
-			outputs.dir 'libs/compile'
+			outputs.dir "$project.libdir.libDirPathName/$project.libdir.compilePathName"
 		}
 		project.task('resolveTestCompileDependencies', type: Copy)
 		{
 			description 'resolve and copy all test dependencies'
-			into 'libs/test'
+			into "$project.libdir.libDirPathName/$project.libdir.testPathName"
 			from project.configurations.testCompileDependencies - project.configurations.compileDependencies
-			outputs.dir 'libs/test'
+			outputs.dir "$project.libdir.libDirPathName/$project.libdir.testPathName"
 		}
 		project.task('resolveDependencies', type: Copy)
 		{
@@ -44,8 +44,8 @@ class LibDirPlugin implements Plugin<Project> {
 		}
 
 		// add dependency to lib folders for the java compile and testCompile configurations
-		project.dependencies.add('compile', project.fileTree(dir: 'libs/compile'))
-		project.dependencies.add('testCompile', project.fileTree(dir: 'libs/test'))
+		project.dependencies.add('compile', project.fileTree(dir: "$project.libdir.libDirPathName/$project.libdir.compilePathName"))
+		project.dependencies.add('testCompile', project.fileTree(dir: "$project.libdir.libDirPathName/$project.libdir.testPathName"))
 
 		// add clean tasks
 		project.task('cleanResolveCompileDependencies', type: Delete)
