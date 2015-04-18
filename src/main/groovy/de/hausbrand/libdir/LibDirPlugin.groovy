@@ -2,10 +2,17 @@ package de.hausbrand.libdir;
 
 import org.gradle.api.*
 import org.gradle.api.artifacts.*
+import org.gradle.api.plugins.InvalidPluginException
 import org.gradle.api.tasks.*
 
 class LibDirPlugin implements Plugin<Project> {
 	void apply(Project project) {
+		//check if compile and testCompile configurations exists
+		if(!project.configurations.find { it.name == 'compile' || it.name == 'testCompile' })
+		{
+			throw new InvalidPluginException("no compile or testCompile configuration was found. Maybe java plugin is missing?")
+		}
+
 		// add plugin specific properties
 		//project.extensions.create("libDirPlugin", LibDirPluginExtension)
 
